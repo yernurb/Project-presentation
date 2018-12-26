@@ -150,8 +150,8 @@
   Скорости частиц после столкновения
   \begin{equation}
     \begin{split}
-      \bv^{'}_i&=\bv_i-\frac{\mu}{m_i}(1+\varepsilon)(\bg\cdot\bn)\bn\;,\\
-      \bv^{'}_j&=\bv_j+\frac{\mu}{m_j}(1+\varepsilon)(\bg\cdot\bn)\bn\;,
+      \bv'_i&=\bv_i-\frac{\mu}{m_i}(1+\varepsilon)(\bg\cdot\bn)\bn\;,\\
+      \bv'_j&=\bv_j+\frac{\mu}{m_j}(1+\varepsilon)(\bg\cdot\bn)\bn\;,
     \end{split}
   \end{equation}
   где $\mu=\cfrac{m_im_j}{m_i+m_j}$ --- эффективная масса столкновения
@@ -168,63 +168,82 @@
   где $(m_i+m_j)\bv_C=m_i\bv_i+m_j\bv_j$ --- скорость центра масс
 \end{frame}
 
+\begin{frame}[fragile]{Нарушение равнораспределения энергии}
+  Частицы с разными массами диссипируют разное количество энергии
 
-\section{Elements}
+  \begin{equation}
+    \left(\frac{\delta E_i}{\delta E_j}\right)_{diss}=\frac{m_j}{m_i}
+  \end{equation}
+  чем \alert{меньше} масса частицы, тем \alert{больше} энергии она теряет. Полная потеря энергии
+  \begin{equation}
+    \delta E_i+\delta E_j=-\frac{1-\eps^2}{2}\mu(\bg\cdot\bn)^2
+  \end{equation}
 
-\begin{frame}[fragile]{Typography}
-      \begin{verbatim}The theme provides sensible defaults to
-\emph{emphasize} text, \alert{accent} parts
-or show \textbf{bold} results.\end{verbatim}
-
-  \begin{center}becomes\end{center}
-
-  The theme provides sensible defaults to \emph{emphasize} text,
-  \alert{accent} parts or show \textbf{bold} results.
 \end{frame}
 
-\begin{frame}{Font feature test}
-  \begin{itemize}
-    \item Regular
-    \item \textit{Italic}
-    \item \textsc{SmallCaps}
-    \item \textbf{Bold}
-    \item \textbf{\textit{Bold Italic}}
-    \item \textbf{\textsc{Bold SmallCaps}}
-    \item \texttt{Monospace}
-    \item \texttt{\textit{Monospace Italic}}
-    \item \texttt{\textbf{Monospace Bold}}
-    \item \texttt{\textbf{\textit{Monospace Bold Italic}}}
-  \end{itemize}
+\begin{frame}[fragile]{Интеграл столкновений}
+  В общем виде интеграл столкновений для гранулярных газов имеет вид
+  \begin{equation}
+    \begin{split}
+      &I_c(t,m_i,\br,\bv_i) = \int dm_j\eta(m_j)\sigma_{ij}\int d\bv_j\int d\bn\Theta(-\bg\cdot\bn)\vert\bg\cdot\bn\vert\times\\
+      &\times\left(\frac{1}{\eps^2}f(t,m_i,\br,\bv''_i)f(t,m_j,\br,\bv''_j)-f(t,m_i,\br,\bv_i)f(t,m_j,\br,\bv_j)\right)
+    \end{split}
+  \end{equation}
+
+  где $\bv^{''}_i$ и $\bv^{''}_j$ --- скорости обратных столкновений
 \end{frame}
 
-\begin{frame}{Lists}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.33\textwidth}
-      Items
-      \begin{itemize}
-        \item Milk \item Eggs \item Potatos
-      \end{itemize}
+\section{Гидродинамическое описание}
 
-    \column{0.33\textwidth}
-      Enumerations
-      \begin{enumerate}
-        \item First, \item Second and \item Last.
-      \end{enumerate}
+\begin{frame}[fragile]{Условия применимости}
+  Гидродинамическое приближение подразумевает описание системы только через его \alert{макроскопические} параметры.
+  Для существования возможности такого описания необходимы условия
+  \begin{equation}
+    \sigma\ll\ell\ll L
+  \end{equation}
+\end{frame}
 
-    \column{0.33\textwidth}
-      Descriptions
-      \begin{description}
-        \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
-      \end{description}
-  \end{columns}
+\begin{frame}[fragile]{Макроскопические переменные}
+  Все макропараметры определяются как моменты вектора скорости частиц
+  \begin{equation}
+    \begin{split}
+      \rho(t,m,\br) &= \int mf(t,m,\br,\br)d\bv\;,\\
+      \rho\bu(t,m,\br) &= \int m\bv f(t,m,\br,\bv)d\bv\;,\\
+      \frac{3}{2}nT(t,m,\br) &= \int \frac{m\bc^2}{2}f(t,m,\br,\bv)d\bv\;,
+    \end{split}
+  \end{equation}
+  где $\bc=\bv-\bu(t,m,\br)$ --- локальная скорость частиц
 \end{frame}
-\begin{frame}{Animation}
-  \begin{itemize}[<+- | alert@+>]
-    \item \alert<4>{This is\only<4>{ really} important}
-    \item Now this
-    \item And now this
-  \end{itemize}
+
+\begin{frame}[fragile]{Уравнения переноса}
+  Интегрируя уравнение Больцмана по соответствующим моментам скоростей частиц получаем
+  \begin{equation}
+    \begin{split}
+      &\frac{\pd\rho}{\pd t}+\frac{\pd}{\pd r_{\alpha}}(\rho u_{\alpha})=0\;,\\
+      &\frac{\pd(\rho u_\alpha)}{\pd t} + \frac{\pd}{\pd r_\beta}(\rho u_\alpha u_\beta) = 
+  -\frac{\pd\left(nT\right)}{\pd r_\alpha} - \frac{\pd\pi_{\ab}}{\pd r_\beta} + \rho w_\alpha\;,\\
+  &\frac{\pd}{\pd t}\left(\frac{3}{2}nT+\frac{\rho\bu^2}{2}\right)+
+  \frac{\pd}{\pd r_\alpha}u_\alpha\left(\frac{5}{2}nT+\frac{\rho\bu^2}{2}\right)+\\
+  &+\frac{\pd}{\pd r_\alpha}(\pi_{\ab}u_\beta)
+  +\frac{\pd q_\alpha}{\pd r_\alpha}=\rho\bw\cdot\bu-T\cdot\alert{\xi}\;.
+    \end{split}
+  \end{equation}
+
 \end{frame}
+
+\begin{frame}[fragile]{Охлаждения системы}
+  Скорость охлаждения системы 
+  \begin{equation}
+  \begin{split}
+    \xi(t,m_i,\br,T_i)&=-\frac{n_i}{T_i}\int d\chi_i \omega_{ij}(-A_{ij}T_i+B_{ij}(T_j-T_i))\;,\\
+    A_{ij} &= \left(1-\eps^2\right)\frac{\mu}{m_i}\;,\\
+    B_{ij} &= \left(1+\eps\right)^2\frac{\mu^2}{m_im_j}\;.
+  \end{split}
+  \end{equation}
+  где $\omega_{ij}$ --- частота столкновений частиц. 
+
+\end{frame}
+
 \begin{frame}{Figures}
   \begin{figure}
     \newcounter{density}
